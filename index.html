@@ -80,6 +80,7 @@
     <button data-t="leagues">📊 Leagues</button>
     <button data-t="rm">⚪ Real Madrid</button>
     <button data-t="wh">⚒️ West Ham</button>
+    <button data-t="champ">🏟️ Championship</button>
     <button data-t="transfers">🔁 Transfers</button>
     <button data-t="europe">🗓️ Europe &amp; Dates</button>
   </nav>
@@ -110,8 +111,8 @@
 
     <div class="card">
       <h2>🥇 Golden Boots — 2025/26</h2>
-      <div class="scorer"><span>🇪🇸</span><div><b>Kylian Mbappé</b> · Real Madrid <div class="sm mut">La Liga Pichichi — 2nd year running</div></div></div>
-      <div class="scorer"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><div><b>Erling Haaland</b> · Man City <div class="sm mut">PL Golden Boot — 3rd in 4 years</div></div></div>
+      <div class="scorer"><span>🇪🇸</span><div><b>Kylian Mbappé</b> · Real Madrid <div class="sm mut">La Liga Pichichi — 2nd year running</div></div><span class="g">25</span></div>
+      <div class="scorer"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><div><b>Erling Haaland</b> · Man City <div class="sm mut">PL Golden Boot — 3rd in 4 years</div></div><span class="g">27</span></div>
       <div class="scorer"><span>🇩🇪</span><div><b>Harry Kane</b> · Bayern <div class="sm mut">Bundesliga top scorer</div></div><span class="g">36</span></div>
       <div class="scorer"><span>🇮🇹</span><div><b>Lautaro Martínez</b> · Inter <div class="sm mut">Serie A Capocannoniere</div></div><span class="g">17</span></div>
     </div>
@@ -239,6 +240,35 @@
     </div>
   </section>
 
+  <!-- CHAMPIONSHIP (West Ham's division) -->
+  <section class="tab" id="champ">
+    <div class="note">West Ham play in the <b>EFL Championship</b> for 2026/27 (their first second-tier season since 2011/12), alongside fellow relegated sides <b>Burnley</b> &amp; <b>Wolves</b> — all three among the promotion favourites. The season opens <b>Aug 14–16</b>.</div>
+
+    <div class="card">
+      <h2>🏟️ Championship — 2025/26 final table <span class="badge b-win">Coventry</span></h2>
+      <div class="sm mut" style="margin-bottom:4px">Last season's table — Coventry, Ipswich &amp; Hull went up; West Ham, Burnley &amp; Wolves come down.</div>
+      <table>
+        <tr><th class="pos">#</th><th>Club</th><th class="pts">Pts</th></tr>
+        <tr><td class="pos">1</td><td>Coventry City <span class="tag tag-c">C · ↑PL</span></td><td class="pts">95</td></tr>
+        <tr><td class="pos">2</td><td>Ipswich Town <span class="tag tag-c">↑PL</span></td><td class="pts">84</td></tr>
+        <tr><td class="pos">3</td><td>Millwall</td><td class="pts">83</td></tr>
+        <tr><td class="pos">4</td><td>Southampton</td><td class="pts">80</td></tr>
+        <tr><td class="pos">5</td><td>Middlesbrough</td><td class="pts">80</td></tr>
+        <tr><td class="pos">6</td><td>Hull City <span class="tag tag-c">↑PL (PO)</span></td><td class="pts">73</td></tr>
+        <tr class="relrow"><td class="pos">↓</td><td>Oxford Utd · Leicester · Sheffield Wed <span class="tag tag-r">R</span></td><td class="pts"></td></tr>
+      </table>
+      <div class="note" style="margin-top:12px">The <b>2026/27</b> table starts level on Aug 14 — it'll populate here once games kick off.</div>
+    </div>
+
+    <div class="card">
+      <h2>📅 West Ham — games &amp; key dates</h2>
+      <div class="date"><span class="d">Jun 25</span><span class="w">2026/27 Championship fixtures released (12:00 BST)</span></div>
+      <div class="date"><span class="d">Aug 14</span><span class="w"><b>West Ham's first match</b> — opponent confirmed Jun 25</span></div>
+      <div class="date"><span class="d">Aug 14–16</span><span class="w">Championship opening round</span></div>
+      <div class="note" style="margin-top:12px">⏱️ Once fixtures drop (Jun 25), West Ham's opening games appear here — and <b>live scores will run in the ticker</b> during the season.</div>
+    </div>
+  </section>
+
   <!-- TRANSFERS -->
   <section class="tab" id="transfers">
     <div class="card">
@@ -291,19 +321,28 @@
 
 <script>
   // Scrolling ticker — duplicated items make the marquee loop seamlessly
-  var HEADLINES = [
-    "🏆 <b>PSG</b> retain the Champions League — beat Arsenal 4–3 on penalties in Budapest",
-    "🇪🇸 <b>Barcelona</b> win La Liga (29th title) · Real Madrid 2nd",
-    "⚪ <b>José Mourinho</b> appointed Real Madrid head coach (3-yr deal)",
-    "⚒️ <b>West Ham relegated</b> to the Championship (18th, 39 pts)",
-    "🔁 Real Madrid sign <b>Cucurella, Bernardo Silva, Konaté &amp; Dumfries</b>",
-    "🥇 <b>Mbappé</b> Pichichi · <b>Haaland</b> PL Golden Boot · <b>Kane</b> 36 (Europe's top scorer)",
-    "🏴󠁧󠁢󠁥󠁮󠁧󠁿 <b>Arsenal</b> win the Premier League (4th title)",
-    "🇮🇹 <b>Inter</b> win Serie A · 🇩🇪 <b>Bayern</b> win the Bundesliga",
-    "🥈 <b>Aston Villa</b> win the Europa League (bt Freiburg 3–0)",
-    "💷 Biggest deals: Gordon→Barça £69m · Jacquet→Liverpool £55m · van Hecke→Spurs £52m",
-    "🗓️ Premier League 2026/27 starts <b>Aug 21</b> (Arsenal v Coventry) · deadline day <b>Sep 1</b>"
+  // LIVE_GAMES: during the season, push score lines (e.g. "⚒️ West Ham 2–1 Coventry 78'")
+  // to the FRONT of this array so the latest games lead the ticker.
+  var LIVE_GAMES = [];
+  var TRANSFERS = [
+    "🔁 TRANSFERS — <b>Anthony Gordon</b> joins Barcelona from Newcastle for <b>£69m</b>",
+    "⚪ <b>Real Madrid</b>: Cucurella £47.5m · Bernardo Silva &amp; Konaté (free) · Dumfries €20m",
+    "🔴 <b>Jérémy Jacquet</b> → Liverpool £55m · <b>Víctor Muñoz</b> → Liverpool £34.5m",
+    "⚪ <b>Jan Paul van Hecke</b> → Tottenham £52m · <b>Piero Hincapié</b> → Arsenal £45m",
+    "🔵 <b>Geovany Quenda</b> → Chelsea £44m · <b>Rasmus Højlund</b> → Napoli £38m",
+    "⚫ <b>Loïs Openda</b> → Juventus £35m · <b>Donyell Malen</b> → Roma £21.7m",
+    "⚒️ <b>West Ham</b>: Lamadrid in; Bowen, Fernandes &amp; Summerville linked with exits",
+    "📝 <b>Declan Rice</b> signs new Arsenal deal to 2029 · Newcastle sign GK <b>Jaouen</b>",
+    "↔️ Reported: <b>Kim Min-jae</b> Bayern → Al-Hilal"
   ];
+  var SEASON = [
+    "🏆 <b>PSG</b> retain the Champions League (bt Arsenal on pens) · <b>Aston Villa</b> win the Europa League",
+    "🇪🇸 La Liga <b>Barcelona</b> · 🏴󠁧󠁢󠁥󠁮󠁧󠁿 PL <b>Arsenal</b> · 🇮🇹 <b>Inter</b> · 🇩🇪 <b>Bayern</b> · 🇫🇷 Ligue 1 <b>PSG</b>",
+    "🥇 <b>Mbappé</b> 25 (Pichichi) · <b>Haaland</b> 27 (Golden Boot) · <b>Kane</b> 36 · <b>Lautaro</b> 17",
+    "⚒️ <b>West Ham relegated</b> — Championship opens Aug 14 (fixtures Jun 25)",
+    "🗓️ Premier League 2026/27 starts <b>Aug 21</b> · transfer deadline day <b>Sep 1</b>"
+  ];
+  var HEADLINES = LIVE_GAMES.concat(TRANSFERS, SEASON);
   (function(){
     var one = HEADLINES.map(function(h){return '<span class="item">'+h+'</span>'}).join('');
     document.getElementById('ticker').innerHTML = one + one; // duplicate for seamless loop
