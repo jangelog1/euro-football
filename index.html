@@ -6,151 +6,142 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Euro Football">
-<title>Euro Football Tracker — Real Madrid & West Ham</title>
+<title>Euro Football Dashboard — Real Madrid & West Ham</title>
 <style>
   :root{
     --bg:#0b0e14; --panel:#141925; --panel2:#1b2230; --line:#28303f;
     --txt:#eef2f8; --mut:#9aa6b8; --accent:#19c37d;
-    --rm:#febe10; --rmnavy:#0a1733; --wh:#7a263a; --whblue:#1bb1e7;
+    --rm:#febe10; --rmnavy:#0a1733; --wh:#7a263a; --whblue:#1bb1e7; --ucl:#1b1c5e;
   }
   *{box-sizing:border-box}
   html,body{margin:0}
   body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.45}
   a{color:var(--whblue)}
-  .wrap{max-width:760px;margin:0 auto;padding:0 14px 40px}
-  header.top{padding:18px 14px 10px;max-width:760px;margin:0 auto}
-  header.top h1{margin:0;font-size:22px;letter-spacing:.2px}
-  header.top .sub{color:var(--mut);font-size:12.5px;margin-top:4px}
-  .stamp{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:11.5px;color:var(--mut);margin-top:8px;font-weight:600}
-  nav.tabs{position:sticky;top:0;z-index:30;display:flex;flex-wrap:wrap;gap:7px;padding:10px 14px;background:rgba(11,14,20,.97);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
-  nav.tabs button{flex:0 0 auto;cursor:pointer;background:var(--panel);border:1px solid var(--line);color:var(--txt);padding:8px 13px;border-radius:999px;font-size:13px;font-weight:700}
+  .wrap{max-width:780px;margin:0 auto;padding:0 14px 44px}
+  /* sticky topbar = ticker + tabs */
+  .topbar{position:sticky;top:0;z-index:50}
+  .ticker{overflow:hidden;background:linear-gradient(90deg,#101727,#0d1320);border-bottom:1px solid var(--line);white-space:nowrap}
+  .ticker .move{display:inline-block;will-change:transform;animation:tick 70s linear infinite}
+  .ticker .item{display:inline-block;padding:8px 26px;font-size:12.5px;font-weight:600;color:#d7dfec;border-right:1px solid #222a39}
+  .ticker .item b{color:#fff}
+  @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (prefers-reduced-motion: reduce){.ticker .move{animation:none}}
+  nav.tabs{display:flex;flex-wrap:wrap;gap:7px;padding:9px 12px;background:rgba(11,14,20,.98);border-bottom:1px solid var(--line);backdrop-filter:blur(6px)}
+  nav.tabs button{flex:0 0 auto;cursor:pointer;background:var(--panel);border:1px solid var(--line);color:var(--txt);padding:8px 12px;border-radius:999px;font-size:12.5px;font-weight:700}
   nav.tabs button.on{background:var(--accent);color:#06231a;border-color:var(--accent)}
-  section.tab{display:none;padding-top:16px}
+  header.top{padding:16px 14px 6px;max-width:780px;margin:0 auto}
+  header.top h1{margin:0;font-size:21px}
+  header.top .sub{color:var(--mut);font-size:12px;margin-top:3px}
+  .stamp{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:11px;color:var(--mut);margin-top:7px;font-weight:600}
+  section.tab{display:none;padding-top:14px}
   section.tab.on{display:block}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin:0 0 14px}
-  .card h2{margin:0 0 4px;font-size:17px;display:flex;align-items:center;gap:9px}
-  .card h3{margin:14px 0 8px;font-size:14px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px}
-  .badge{font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:999px;vertical-align:middle}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px;margin:0 0 13px}
+  .card h2{margin:0 0 4px;font-size:16px;display:flex;align-items:center;gap:8px}
+  .card h3{margin:13px 0 7px;font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px}
+  .lead{font-size:13.5px}
+  .mut{color:var(--mut)} .sm{font-size:12px}
+  .badge{font-size:10px;font-weight:800;padding:2px 7px;border-radius:999px;white-space:nowrap}
   .b-rm{background:var(--rmnavy);color:var(--rm);border:1px solid var(--rm)}
   .b-wh{background:var(--wh);color:#fff}
   .b-win{background:#0e3a24;color:#39d98a;border:1px solid #1f7a4d}
-  .b-rel{background:#3a1620;color:#ff6b81;border:1px solid #7a2740}
-  .row{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .b-rep{background:#2a2336;color:#c9a7ff;border:1px solid #5a4a7a}
+  .row{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px}
   .row:last-child{border-bottom:0}
   .row .em{width:22px;text-align:center;flex:0 0 auto}
   .row .main{flex:1}
-  .row .main b{font-weight:700}
-  .row .sub{color:var(--mut);font-size:12.5px;margin-top:2px}
-  .lead{font-size:14px;color:var(--txt)}
-  .mut{color:var(--mut)}
-  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
-  th,td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--line)}
-  th{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.5px;font-weight:700}
-  td.pos{color:var(--mut);width:26px}
-  td.pts{text-align:right;font-weight:800;width:42px}
-  tr.hl-rm td{background:rgba(254,190,16,.08)}
-  tr.hl-wh td{background:rgba(122,38,58,.20)}
+  .row .sub{color:var(--mut);font-size:12px;margin-top:2px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  th,td{text-align:left;padding:6px 6px;border-bottom:1px solid var(--line)}
+  th{color:var(--mut);font-size:10.5px;text-transform:uppercase;letter-spacing:.5px}
+  td.pos{color:var(--mut);width:24px} td.pts{text-align:right;font-weight:800;width:40px}
+  td.fee{text-align:right;font-weight:700;width:64px;color:#bfe6cf}
+  tr.hl-rm td{background:rgba(254,190,16,.09)} tr.hl-wh td{background:rgba(122,38,58,.22)}
   tr.relrow td{color:#ff8a9c}
-  .tag{font-size:10px;font-weight:800;padding:1px 6px;border-radius:6px;margin-left:6px}
-  .tag-c{background:#0e3a24;color:#39d98a}
-  .tag-ucl{background:#15223f;color:#7fb2ff}
-  .tag-r{background:#3a1620;color:#ff6b81}
-  .pill{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:3px 9px;font-size:12px;margin:3px 5px 0 0}
-  .src{font-size:11px;color:var(--mut);word-break:break-word}
-  footer{color:var(--mut);font-size:11.5px;text-align:center;padding:18px 14px;border-top:1px solid var(--line);margin-top:10px}
-  .note{background:var(--panel2);border-left:3px solid var(--accent);border-radius:8px;padding:10px 12px;font-size:13px;margin:0 0 14px;color:#d8e0ec}
+  .tag{font-size:9.5px;font-weight:800;padding:1px 6px;border-radius:6px;margin-left:5px}
+  .tag-c{background:#0e3a24;color:#39d98a} .tag-r{background:#3a1620;color:#ff6b81}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+  @media(max-width:560px){.grid2{grid-template-columns:1fr}}
+  .scorer{display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-size:12.5px;margin-top:8px}
+  .scorer b{font-weight:800} .scorer .g{margin-left:auto;font-weight:800;color:var(--rm)}
+  .pill{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:3px 9px;font-size:11.5px;margin:3px 5px 0 0}
+  .note{background:var(--panel2);border-left:3px solid var(--accent);border-radius:8px;padding:9px 11px;font-size:12.5px;margin:0 0 13px;color:#d8e0ec}
+  .date{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .date:last-child{border-bottom:0}
+  .date .d{font-weight:800;color:#fff;flex:0 0 96px} .date .w{color:var(--mut)}
+  footer{color:var(--mut);font-size:11px;text-align:center;padding:18px 14px;border-top:1px solid var(--line);margin-top:8px}
 </style>
 </head>
 <body>
-<header class="top">
-  <h1>⚽ Euro Football Tracker</h1>
-  <div class="sub">Real Madrid 🇪🇸 &amp; West Ham 🏴󠁧󠁢󠁥󠁮󠁧󠁿 · transfers, standings &amp; European news</div>
-  <div class="stamp" id="stamp">Verified snapshot · Jun 21, 2026</div>
-</header>
 
-<nav class="tabs" id="nav">
-  <button class="on" data-t="overview">🌍 Overview</button>
-  <button data-t="rm">⚪ Real Madrid</button>
-  <button data-t="wh">⚒️ West Ham</button>
-  <button data-t="tables">📊 Standings</button>
-  <button data-t="transfers">🔁 Transfers</button>
-</nav>
+<div class="topbar">
+  <div class="ticker"><div class="move" id="ticker"></div></div>
+  <nav class="tabs" id="nav">
+    <button class="on" data-t="overview">🌍 Overview</button>
+    <button data-t="leagues">📊 Leagues</button>
+    <button data-t="rm">⚪ Real Madrid</button>
+    <button data-t="wh">⚒️ West Ham</button>
+    <button data-t="transfers">🔁 Transfers</button>
+    <button data-t="europe">🗓️ Europe &amp; Dates</button>
+  </nav>
+</div>
+
+<header class="top">
+  <h1>⚽ Euro Football Dashboard</h1>
+  <div class="sub">Real Madrid 🇪🇸 &amp; West Ham ⚒️ · 5 leagues · transfers · standings · European news</div>
+  <div class="stamp">Verified snapshot · Jun 21, 2026 · off-season</div>
+</header>
 
 <div class="wrap">
 
   <!-- OVERVIEW -->
   <section class="tab on" id="overview">
-    <div class="note">It's the <b>summer 2026 off-season</b> — domestic leagues are finished, the <b>transfer window is open</b> (England/Scotland opened Jun 15, deadline <b>Sep 1, 11pm GMT</b>), and the <b>2026 World Cup</b> is underway. So this leads with transfers &amp; final tables.</div>
+    <div class="note">It's the <b>summer 2026 off-season</b>: leagues are finished, the <b>transfer window is open</b> (deadline <b>Sep 1</b>), the <b>2026 World Cup</b> is on, and clubs are gearing up for <b>2026/27</b> (Premier League kicks off <b>Aug 21</b>).</div>
 
     <div class="card">
-      <h2>🏆 2025/26 — How it finished</h2>
-      <div class="row"><span class="em">🇪🇺</span><div class="main"><b>Champions League:</b> Paris Saint-Germain<div class="sub">Beat Arsenal 1–1 (4–3 pens) in Budapest, May 30 — back-to-back titles (2nd club after Real Madrid '16–17).</div></div></div>
-      <div class="row"><span class="em">🇪🇸</span><div class="main"><b>La Liga:</b> Barcelona <span class="badge b-win">CHAMPIONS</span><div class="sub">94 pts, their 29th title — clinched May 10 with a 2–0 win over Real Madrid. Real Madrid runner-up (86).</div></div></div>
-      <div class="row"><span class="em">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><div class="main"><b>Premier League:</b> Arsenal <span class="badge b-win">CHAMPIONS</span><div class="sub">85 pts, 4th English title. West Ham relegated in 18th (39 pts).</div></div></div>
+      <h2>🏆 2025/26 champions</h2>
+      <div class="row"><span class="em">🇪🇺</span><div class="main"><b>Champions League — Paris Saint-Germain</b><div class="sub">Beat Arsenal 1–1 (4–3 pens), Budapest · back-to-back European crowns.</div></div></div>
+      <div class="row"><span class="em">🥈</span><div class="main"><b>Europa League — Aston Villa</b><div class="sub">Beat Freiburg 3–0 in Istanbul · first UEL title.</div></div></div>
+      <div class="row"><span class="em">🇪🇸</span><div class="main"><b>La Liga — Barcelona</b> (94 pts) <span class="sub">· Real Madrid 2nd (86)</span></div></div>
+      <div class="row"><span class="em">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><div class="main"><b>Premier League — Arsenal</b> (85 pts) <span class="sub">· West Ham relegated</span></div></div>
+      <div class="row"><span class="em">🇮🇹</span><div class="main"><b>Serie A — Inter Milan</b> (87 pts)</div></div>
+      <div class="row"><span class="em">🇩🇪</span><div class="main"><b>Bundesliga — Bayern Munich</b> (89 pts)</div></div>
+      <div class="row"><span class="em">🇫🇷</span><div class="main"><b>Ligue 1 — Paris Saint-Germain</b> (76 pts)</div></div>
     </div>
 
     <div class="card">
-      <h2>📌 Your clubs — the headlines</h2>
-      <div class="row"><span class="em">⚪</span><div class="main"><b>Real Madrid</b> <span class="badge b-rm">LA LIGA 2ND</span><div class="sub">New era: <b>José Mourinho</b> appointed head coach (3-yr deal, starts Jul 13) after a trophyless season. Busy window — four signings already in.</div></div></div>
-      <div class="row"><span class="em">⚒️</span><div class="main"><b>West Ham</b> <span class="badge b-wh">RELEGATED</span><div class="sub">Down to the Championship for 2026/27 (first time since 2011/12). Manager Nuno's future uncertain; squad upheaval expected.</div></div></div>
+      <h2>🥇 Golden Boots — 2025/26</h2>
+      <div class="scorer"><span>🇪🇸</span><div><b>Kylian Mbappé</b> · Real Madrid <div class="sm mut">La Liga Pichichi — 2nd year running</div></div></div>
+      <div class="scorer"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><div><b>Erling Haaland</b> · Man City <div class="sm mut">PL Golden Boot — 3rd in 4 years</div></div></div>
+      <div class="scorer"><span>🇩🇪</span><div><b>Harry Kane</b> · Bayern <div class="sm mut">Bundesliga top scorer</div></div><span class="g">36</span></div>
+      <div class="scorer"><span>🇮🇹</span><div><b>Lautaro Martínez</b> · Inter <div class="sm mut">Serie A Capocannoniere</div></div><span class="g">17</span></div>
+    </div>
+
+    <div class="card">
+      <h2>📌 Your clubs</h2>
+      <div class="row"><span class="em">⚪</span><div class="main"><b>Real Madrid</b> <span class="badge b-rm">LA LIGA 2ND</span><div class="sub">Trophyless season → <b>José Mourinho</b> in as head coach; four signings already done.</div></div></div>
+      <div class="row"><span class="em">⚒️</span><div class="main"><b>West Ham</b> <span class="badge b-wh">RELEGATED</span><div class="sub">Down to the Championship for 2026/27; rebuild underway, Nuno's future uncertain.</div></div></div>
     </div>
   </section>
 
-  <!-- REAL MADRID -->
-  <section class="tab" id="rm">
-    <div class="card" style="border-color:var(--rm)">
-      <h2>⚪ Real Madrid <span class="badge b-rm">2025/26: 2nd</span></h2>
-      <p class="lead">Finished <b>2nd in La Liga (86 pts)</b>, eight behind champions Barcelona, and ended the campaign without a major trophy. A turbulent year in the dugout: <b>Xabi Alonso</b> (appointed Jun 2025) left by mutual consent on <b>Jan 12, 2026</b>; <b>Álvaro Arbeloa</b> steadied the side as caretaker.</p>
-      <h3>The new manager</h3>
-      <div class="row"><span class="em">🇵🇹</span><div class="main"><b>José Mourinho</b> — appointed on a <b>three-year deal</b> (announced Jun 11).<div class="sub">Starts Jul 13 as preseason begins. A return 13 years after his first spell, confirmed after Florentino Pérez was re-elected president on Jun 8.</div></div></div>
-      <h3>Confirmed signings — summer 2026</h3>
-      <div class="row"><span class="em">🛡️</span><div class="main"><b>Marc Cucurella</b> — DF, from Chelsea<div class="sub">£47.5m (+£4.3m add-ons), six-year deal.</div></div></div>
-      <div class="row"><span class="em">🎯</span><div class="main"><b>Bernardo Silva</b> — MF, from Manchester City<div class="sub">Free transfer, two-year deal (contract expired).</div></div></div>
-      <div class="row"><span class="em">🧱</span><div class="main"><b>Ibrahima Konaté</b> — DF, from Liverpool<div class="sub">Free transfer, four-year deal (effective end of June).</div></div></div>
-      <div class="row"><span class="em">➡️</span><div class="main"><b>Denzel Dumfries</b> — RWB, from Inter<div class="sub">€20m release clause, four-year deal (signed Jun 9).</div></div></div>
-      <div class="row"><span class="em">📝</span><div class="main"><b>Antonio Rüdiger</b> — contract extension<div class="sub">Tied to the club until Jun 30, 2027.</div></div></div>
-      <div class="note" style="margin-top:14px">Several Madrid players are at the <b>2026 World Cup</b> right now — see your separate WC 2026 app for live tournament coverage.</div>
-    </div>
-  </section>
-
-  <!-- WEST HAM -->
-  <section class="tab" id="wh">
-    <div class="card" style="border-color:var(--wh)">
-      <h2>⚒️ West Ham United <span class="badge b-wh">RELEGATED</span></h2>
-      <p class="lead">Relegated on the final day, finishing <b>18th with 39 points</b> — the first side relegated from the Premier League with as many as 39 points since 2010/11. The Hammers drop to the <b>EFL Championship for 2026/27</b>, ending a top-flight stay that began in 2011/12.</p>
-      <h3>In the dugout</h3>
-      <div class="row"><span class="em">🇵🇹</span><div class="main"><b>Nuno Espírito Santo</b> — manager<div class="sub">Future uncertain following relegation; a rebuild is expected.</div></div></div>
-      <h3>Confirmed transfers — summer 2026</h3>
-      <div class="row"><span class="em">🟢</span><div class="main"><b>IN — Keiber Lamadrid</b> (LW)<div class="sub">From Deportivo La Guaira · undisclosed fee.</div></div></div>
-      <div class="row"><span class="em">🔴</span><div class="main"><b>OUT — Krisztián Hegyi</b> (GK)<div class="sub">Free transfer to Sparta Prague.</div></div></div>
-      <h3>Key players linked with exits</h3>
-      <div>
-        <span class="pill">Jarrod Bowen → Chelsea</span>
-        <span class="pill">Mateus Fernandes → Man Utd</span>
-        <span class="pill">Crysencio Summerville → AC Milan</span>
-        <span class="pill">Taty Castellanos → Everton</span>
-      </div>
-      <div class="note" style="margin-top:14px">Net spend so far: <b>£0m</b> — the window's only just opened (Jun 15). Expect movement as relegation reshapes the squad.</div>
-    </div>
-  </section>
-
-  <!-- STANDINGS -->
-  <section class="tab" id="tables">
+  <!-- LEAGUES -->
+  <section class="tab" id="leagues">
     <div class="card">
-      <h2>🇪🇸 La Liga — 2025/26 final table</h2>
+      <h2>🇪🇸 La Liga <span class="badge b-win">Barcelona</span></h2>
       <table>
         <tr><th class="pos">#</th><th>Club</th><th class="pts">Pts</th></tr>
-        <tr class="hl-rm"><td class="pos">1</td><td>Barcelona <span class="tag tag-c">C</span></td><td class="pts">94</td></tr>
+        <tr><td class="pos">1</td><td>Barcelona <span class="tag tag-c">C</span></td><td class="pts">94</td></tr>
         <tr class="hl-rm"><td class="pos">2</td><td><b>Real Madrid</b></td><td class="pts">86</td></tr>
         <tr><td class="pos">3</td><td>Villarreal</td><td class="pts">72</td></tr>
         <tr><td class="pos">4</td><td>Atlético Madrid</td><td class="pts">69</td></tr>
         <tr><td class="pos">5</td><td>Real Betis</td><td class="pts">60</td></tr>
         <tr><td class="pos">6</td><td>Celta Vigo</td><td class="pts">54</td></tr>
-        <tr class="relrow"><td class="pos">18–20</td><td>Mallorca · Girona · Real Oviedo <span class="tag tag-r">R</span></td><td class="pts"></td></tr>
+        <tr class="relrow"><td class="pos">↓</td><td>Mallorca · Girona · Real Oviedo <span class="tag tag-r">R</span></td><td class="pts"></td></tr>
       </table>
+      <div class="scorer"><span>👟</span><div>Pichichi: <b>Kylian Mbappé</b> (Real Madrid)</div></div>
     </div>
+
     <div class="card">
-      <h2>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League — 2025/26 final table</h2>
+      <h2>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League <span class="badge b-win">Arsenal</span></h2>
       <table>
         <tr><th class="pos">#</th><th>Club</th><th class="pts">Pts</th></tr>
         <tr><td class="pos">1</td><td>Arsenal <span class="tag tag-c">C</span></td><td class="pts">85</td></tr>
@@ -160,40 +151,164 @@
         <tr><td class="pos">5</td><td>Liverpool</td><td class="pts">60</td></tr>
         <tr><td class="pos">6</td><td>Bournemouth</td><td class="pts">57</td></tr>
         <tr><td class="pos">7</td><td>Sunderland</td><td class="pts">54</td></tr>
-        <tr class="hl-wh relrow"><td class="pos">18</td><td><b>West Ham United</b> <span class="tag tag-r">R</span></td><td class="pts">39</td></tr>
+        <tr class="hl-wh relrow"><td class="pos">18</td><td><b>West Ham</b> <span class="tag tag-r">R</span></td><td class="pts">39</td></tr>
         <tr class="relrow"><td class="pos">19</td><td>Burnley <span class="tag tag-r">R</span></td><td class="pts">22</td></tr>
-        <tr class="relrow"><td class="pos">20</td><td>Wolverhampton <span class="tag tag-r">R</span></td><td class="pts">20</td></tr>
+        <tr class="relrow"><td class="pos">20</td><td>Wolves <span class="tag tag-r">R</span></td><td class="pts">20</td></tr>
       </table>
-      <div class="sub mut" style="margin-top:8px">Mid-table (8th–17th) condensed for focus. Ask to expand to the full 20.</div>
+      <div class="scorer"><span>👟</span><div>Golden Boot: <b>Erling Haaland</b> (Man City)</div></div>
+    </div>
+
+    <div class="card">
+      <h2>🇮🇹 Serie A <span class="badge b-win">Inter Milan</span></h2>
+      <table>
+        <tr><th class="pos">#</th><th>Club</th><th class="pts">Pts</th></tr>
+        <tr><td class="pos">1</td><td>Inter Milan <span class="tag tag-c">C</span></td><td class="pts">87</td></tr>
+        <tr><td class="pos">2</td><td>Napoli</td><td class="pts">76</td></tr>
+        <tr><td class="pos">3</td><td>Roma</td><td class="pts">73</td></tr>
+        <tr><td class="pos">4</td><td>Como</td><td class="pts">71</td></tr>
+        <tr><td class="pos">5</td><td>AC Milan</td><td class="pts">70</td></tr>
+        <tr><td class="pos">6</td><td>Juventus</td><td class="pts">69</td></tr>
+        <tr class="relrow"><td class="pos">↓</td><td>Cremonese · Verona · Pisa <span class="tag tag-r">R</span></td><td class="pts"></td></tr>
+      </table>
+      <div class="scorer"><span>👟</span><div>Capocannoniere: <b>Lautaro Martínez</b> (Inter)</div><span class="g">17</span></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h2>🇩🇪 Bundesliga <span class="badge b-win">Bayern</span></h2>
+        <table>
+          <tr><td class="pos">1</td><td>Bayern Munich <span class="tag tag-c">C</span></td><td class="pts">89</td></tr>
+          <tr><td class="pos">2</td><td>Dortmund</td><td class="pts">73</td></tr>
+          <tr><td class="pos">3</td><td>RB Leipzig</td><td class="pts">65</td></tr>
+          <tr><td class="pos">4</td><td>Stuttgart</td><td class="pts">62</td></tr>
+          <tr><td class="pos">5</td><td>Hoffenheim</td><td class="pts">61</td></tr>
+          <tr><td class="pos">6</td><td>Leverkusen</td><td class="pts">59</td></tr>
+        </table>
+        <div class="scorer"><span>👟</span><div><b>Harry Kane</b></div><span class="g">36</span></div>
+      </div>
+      <div class="card">
+        <h2>🇫🇷 Ligue 1 <span class="badge b-win">PSG</span></h2>
+        <table>
+          <tr><td class="pos">1</td><td>PSG <span class="tag tag-c">C</span></td><td class="pts">76</td></tr>
+          <tr><td class="pos">2</td><td>Lens</td><td class="pts">70</td></tr>
+          <tr><td class="pos">3</td><td>Lille</td><td class="pts">61</td></tr>
+          <tr><td class="pos">4</td><td>Lyon</td><td class="pts">60</td></tr>
+          <tr><td class="pos">5</td><td>Marseille</td><td class="pts">59</td></tr>
+          <tr><td class="pos">6</td><td>Rennes</td><td class="pts">59</td></tr>
+        </table>
+        <div class="scorer"><span>👟</span><div><b>Esteban Lepaul</b> (Rennes)</div><span class="g">21</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REAL MADRID -->
+  <section class="tab" id="rm">
+    <div class="card" style="border-color:var(--rm)">
+      <h2>⚪ Real Madrid <span class="badge b-rm">2025/26: 2nd</span></h2>
+      <p class="lead">A trophyless campaign: <b>2nd in La Liga (86 pts)</b>, eight behind Barcelona, who clinched it with a 2–0 win over Madrid on May 10. <b>Kylian Mbappé</b> was the league's top scorer (Pichichi) — his second straight. The dugout churned: <b>Xabi Alonso</b> left by mutual consent on Jan 12; <b>Álvaro Arbeloa</b> took caretaker charge.</p>
+      <h3>New manager</h3>
+      <div class="row"><span class="em">🇵🇹</span><div class="main"><b>José Mourinho</b> — three-year deal (announced Jun 11; starts Jul 13).<div class="sub">A return 13 years on, confirmed after Florentino Pérez was re-elected president (Jun 8).</div></div></div>
+      <h3>Confirmed signings — summer 2026</h3>
+      <div class="row"><span class="em">🛡️</span><div class="main"><b>Marc Cucurella</b> — DF, Chelsea<div class="sub">£47.5m (+add-ons), six-year deal.</div></div></div>
+      <div class="row"><span class="em">🎯</span><div class="main"><b>Bernardo Silva</b> — MF, Man City<div class="sub">Free transfer, two years.</div></div></div>
+      <div class="row"><span class="em">🧱</span><div class="main"><b>Ibrahima Konaté</b> — DF, Liverpool<div class="sub">Free transfer, four years (effective end of June).</div></div></div>
+      <div class="row"><span class="em">➡️</span><div class="main"><b>Denzel Dumfries</b> — RWB, Inter<div class="sub">€20m release clause, four years (signed Jun 9).</div></div></div>
+      <div class="row"><span class="em">📝</span><div class="main"><b>Antonio Rüdiger</b> — extension to Jun 2027.</div></div>
+      <div class="note" style="margin-top:13px">Madrid stars are at the <b>2026 World Cup</b> right now — see your separate WC 2026 app for live coverage.</div>
+    </div>
+  </section>
+
+  <!-- WEST HAM -->
+  <section class="tab" id="wh">
+    <div class="card" style="border-color:var(--wh)">
+      <h2>⚒️ West Ham United <span class="badge b-wh">RELEGATED</span></h2>
+      <p class="lead">Relegated on the final day in <b>18th with 39 points</b> — the first Premier League side relegated with as many as 39 points since 2010/11. The Hammers drop to the <b>Championship for 2026/27</b> (which starts mid-August), ending a top-flight run that began in 2011/12.</p>
+      <h3>Manager</h3>
+      <div class="row"><span class="em">🇵🇹</span><div class="main"><b>Nuno Espírito Santo</b><div class="sub">Future uncertain following relegation; squad overhaul expected.</div></div></div>
+      <h3>Confirmed transfers — summer 2026</h3>
+      <div class="row"><span class="em">🟢</span><div class="main"><b>IN — Keiber Lamadrid</b> (LW) · Deportivo La Guaira · undisclosed</div></div>
+      <div class="row"><span class="em">🔴</span><div class="main"><b>OUT — Krisztián Hegyi</b> (GK) · Sparta Prague · free</div></div>
+      <h3>Key players linked with exits</h3>
+      <div>
+        <span class="pill">Jarrod Bowen → Chelsea</span>
+        <span class="pill">Mateus Fernandes → Man Utd</span>
+        <span class="pill">Crysencio Summerville → AC Milan</span>
+        <span class="pill">Taty Castellanos → Everton</span>
+      </div>
+      <div class="note" style="margin-top:13px">Net spend so far: <b>£0m</b> — window just opened (Jun 15). Expect movement as relegation reshapes the squad.</div>
     </div>
   </section>
 
   <!-- TRANSFERS -->
   <section class="tab" id="transfers">
     <div class="card">
-      <h2>🔁 Transfer window — summer 2026</h2>
-      <div class="sub mut">English/Scottish window opened Jun 15 · deadline day Sep 1 (11pm GMT).</div>
-      <h3>Real Madrid — done deals</h3>
-      <div class="row"><span class="em">🟢</span><div class="main">Marc Cucurella (Chelsea, £47.5m) · Bernardo Silva (Man City, free) · Ibrahima Konaté (Liverpool, free) · Denzel Dumfries (Inter, €20m)</div></div>
-      <h3>West Ham — done deals</h3>
-      <div class="row"><span class="em">🟢</span><div class="main">IN: Keiber Lamadrid (Dep. La Guaira) &nbsp;·&nbsp; OUT: Krisztián Hegyi (Sparta Prague, free)</div></div>
-      <h3>Around Europe — notable moves</h3>
-      <div class="row"><span class="em">📝</span><div class="main"><b>Declan Rice</b> signs an extension at Arsenal (to 2029).</div></div>
-      <div class="row"><span class="em">↔️</span><div class="main"><b>Kim Min-jae</b> joins Al-Hilal from Bayern Munich. <span class="mut">(reported)</span></div></div>
-      <div class="row"><span class="em">↔️</span><div class="main"><b>Anthony Gordon</b> linked to / agreeing Barcelona. <span class="mut">(reported)</span></div></div>
-      <div class="note" style="margin-top:12px">Items marked <span class="mut">(reported)</span> are credible but not club-confirmed — treat as in-progress until official.</div>
+      <h2>🔁 Biggest confirmed deals — summer 2026</h2>
+      <table>
+        <tr><th class="pos">#</th><th>Player · move</th><th class="fee">Fee</th></tr>
+        <tr><td class="pos">1</td><td><b>Anthony Gordon</b> · Newcastle → Barcelona</td><td class="fee">£69m</td></tr>
+        <tr><td class="pos">2</td><td><b>Jérémy Jacquet</b> · Rennes → Liverpool</td><td class="fee">£55m</td></tr>
+        <tr><td class="pos">3</td><td><b>Jan Paul van Hecke</b> · Brighton → Tottenham</td><td class="fee">£52m</td></tr>
+        <tr class="hl-rm"><td class="pos">4</td><td><b>Marc Cucurella</b> · Chelsea → <b>Real Madrid</b></td><td class="fee">£47.5m</td></tr>
+        <tr><td class="pos">5</td><td><b>Piero Hincapié</b> · Leverkusen → Arsenal</td><td class="fee">£45m</td></tr>
+        <tr><td class="pos">6</td><td><b>Geovany Quenda</b> · Sporting → Chelsea</td><td class="fee">£44m</td></tr>
+        <tr><td class="pos">7</td><td><b>Rasmus Højlund</b> · Man Utd → Napoli</td><td class="fee">£38m</td></tr>
+        <tr><td class="pos">8</td><td><b>Loïs Openda</b> · RB Leipzig → Juventus</td><td class="fee">£35m</td></tr>
+        <tr><td class="pos">9</td><td><b>Víctor Muñoz</b> · Osasuna → Liverpool</td><td class="fee">£34.5m</td></tr>
+        <tr><td class="pos">10</td><td><b>Donyell Malen</b> · Aston Villa → Roma</td><td class="fee">£21.7m</td></tr>
+      </table>
+      <h3>Notable free / key moves</h3>
+      <div class="row"><span class="em">🆓</span><div class="main"><b>Bernardo Silva</b> (Man City → Real Madrid) &amp; <b>Ibrahima Konaté</b> (Liverpool → Real Madrid) — both free.</div></div>
+      <div class="row"><span class="em">📝</span><div class="main"><b>Declan Rice</b> signs a new Arsenal contract (to 2029).</div></div>
+      <div class="row"><span class="em">↔️</span><div class="main"><b>Kim Min-jae</b> · Bayern → Al-Hilal <span class="badge b-rep">REPORTED</span></div></div>
+      <div class="note" style="margin-top:11px"><span class="badge b-rep">REPORTED</span> = credible but not officially confirmed — treat as in-progress.</div>
+    </div>
+  </section>
+
+  <!-- EUROPE & DATES -->
+  <section class="tab" id="europe">
+    <div class="card" style="border-color:#3a3c8a">
+      <h2>🏆 European competitions 2025/26</h2>
+      <div class="row"><span class="em">🇪🇺</span><div class="main"><b>Champions League — PSG</b><div class="sub">PSG 1–1 Arsenal (4–3 pens), Puskás Aréna, Budapest, May 30. Dembélé scored PSG's leveller; Gabriel missed the decisive spot-kick. Back-to-back — first since Real Madrid '16–17.</div></div></div>
+      <div class="row"><span class="em">🥈</span><div class="main"><b>Europa League — Aston Villa</b><div class="sub">Villa 3–0 Freiburg, Istanbul, May 20 (Tielemans, Buendía, Rogers). First UEL title; second European trophy after the 1982 European Cup.</div></div></div>
+    </div>
+    <div class="card">
+      <h2>🗓️ 2026/27 key dates</h2>
+      <div class="date"><span class="d">Jun 15</span><span class="w">Summer transfer window opened (England/Scotland)</span></div>
+      <div class="date"><span class="d">Jun 19</span><span class="w">Premier League 2026/27 fixtures released</span></div>
+      <div class="date"><span class="d">Aug 15</span><span class="w">La Liga 2026/27 begins (approx.)</span></div>
+      <div class="date"><span class="d">Aug 21</span><span class="w">Premier League opens — Arsenal v Coventry City (Emirates)</span></div>
+      <div class="date"><span class="d">Aug 23</span><span class="w">Serie A 2026/27 begins</span></div>
+      <div class="date"><span class="d">Sep 1</span><span class="w">Transfer deadline day (11pm GMT)</span></div>
     </div>
   </section>
 
 </div>
 
 <footer>
-  <div><b>Sources (verified Jun 21, 2026):</b> Wikipedia (2025–26 Premier League · La Liga · UCL final), Al Jazeera &amp; CNN (Mourinho appointment), UEFA.com (UCL final), Sports Mole &amp; ESPN (club transfers), NBC Sports.</div>
-  <div style="margin-top:8px">Off-season snapshot — domestic data is final-table; transfer items reflect the open window and may change. Not affiliated with any club or league.</div>
+  <div><b>Sources (verified Jun 21, 2026):</b> Wikipedia (2025–26 PL · La Liga · Serie A · Bundesliga · Ligue 1 · UCL/UEL finals), Al Jazeera &amp; CNN (Mourinho), UEFA.com, Football365 &amp; Sports Mole (transfers), Sky Sports &amp; Premier League (2026/27 dates), Yahoo Sports (top scorers).</div>
+  <div style="margin-top:8px">Off-season snapshot — domestic data is final; transfer items reflect the open window and may change. Not affiliated with any club or league.</div>
 </footer>
 
 <script>
-  // Simple tab switcher (this is a hosted site, so JS is fine — like the WC 2026 app)
+  // Scrolling ticker — duplicated items make the marquee loop seamlessly
+  var HEADLINES = [
+    "🏆 <b>PSG</b> retain the Champions League — beat Arsenal 4–3 on penalties in Budapest",
+    "🇪🇸 <b>Barcelona</b> win La Liga (29th title) · Real Madrid 2nd",
+    "⚪ <b>José Mourinho</b> appointed Real Madrid head coach (3-yr deal)",
+    "⚒️ <b>West Ham relegated</b> to the Championship (18th, 39 pts)",
+    "🔁 Real Madrid sign <b>Cucurella, Bernardo Silva, Konaté &amp; Dumfries</b>",
+    "🥇 <b>Mbappé</b> Pichichi · <b>Haaland</b> PL Golden Boot · <b>Kane</b> 36 (Europe's top scorer)",
+    "🏴󠁧󠁢󠁥󠁮󠁧󠁿 <b>Arsenal</b> win the Premier League (4th title)",
+    "🇮🇹 <b>Inter</b> win Serie A · 🇩🇪 <b>Bayern</b> win the Bundesliga",
+    "🥈 <b>Aston Villa</b> win the Europa League (bt Freiburg 3–0)",
+    "💷 Biggest deals: Gordon→Barça £69m · Jacquet→Liverpool £55m · van Hecke→Spurs £52m",
+    "🗓️ Premier League 2026/27 starts <b>Aug 21</b> (Arsenal v Coventry) · deadline day <b>Sep 1</b>"
+  ];
+  (function(){
+    var one = HEADLINES.map(function(h){return '<span class="item">'+h+'</span>'}).join('');
+    document.getElementById('ticker').innerHTML = one + one; // duplicate for seamless loop
+  })();
+  // Tabs
   var nav=document.getElementById('nav');
   nav.addEventListener('click',function(e){
     var b=e.target.closest('button'); if(!b) return;
