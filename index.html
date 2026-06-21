@@ -36,6 +36,8 @@
   .stamp{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:11px;color:var(--mut);margin-top:7px;font-weight:600}
   section.tab{display:none;padding-top:14px}
   section.tab.on{display:block}
+  .port .note{background:#16223a;border:1px solid #243450;border-left:3px solid #f0b429;border-radius:8px;padding:9px 12px;margin:0 0 10px;font-size:12.5px;color:#9fb0c8}
+  .port .synced{font-size:11.5px;color:#9fb0c8;padding:4px 2px;font-weight:600}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px;margin:0 0 13px}
   .card h2{margin:0 0 4px;font-size:16px;display:flex;align-items:center;gap:8px}
   .card h3{margin:13px 0 7px;font-size:13px;color:var(--mut);text-transform:uppercase;letter-spacing:.6px}
@@ -84,6 +86,8 @@
     <button data-t="champ">🏟️ Championship</button>
     <button data-t="transfers">🔁 Transfers</button>
     <button data-t="europe">🗓️ Europe &amp; Dates</button>
+    <button data-t="clubfooty">🏟️ Club Footy</button>
+    <button data-t="ucl">🏆 Champions Lg</button>
   </nav>
 </div>
 
@@ -312,6 +316,428 @@
       <div class="date"><span class="d">Sep 1</span><span class="w">Transfer deadline day (11pm GMT)</span></div>
     </div>
   </section>
+
+  <!-- 🏟️ Club Footy (ported from Daily Sports Tracker) -->
+  <section class="tab port" id="clubfooty">
+    <div class="note">🏟️ <b>Club Football</b> — across the top European leagues: results, movers and storylines. <i>Daily snapshot from the tracker pipeline.</i></div>
+<div class="synced">🕒 Last synced: Sun Jun 21, 6:21 AM</div><style>#sw4{
+    --bg:#0b1220; --card:#121c2e; --card2:#16223a; --ink:#eef3fb; --muted:#9fb0c8;
+    --line:#243450; --accent:#19c37d; --gold:#f0b429; --red:#e23b4e; --blue:#3b82f6; --purple:#8b5cf6;
+  }#sw4 *{box-sizing:border-box}#sw4{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.45;padding:14px;-webkit-text-size-adjust:100%;}#sw4 .wrap{max-width:680px;margin:0 auto;}#sw4 header.hero{background:linear-gradient(120deg,#0b3a8f 0%,#10233b 55%,#7a1020 100%);
+    color:#fff;border-radius:16px;padding:18px 18px 16px;box-shadow:0 6px 18px rgba(0,0,0,.35);}#sw4 .hero h1{margin:0 0 4px;font-size:21px;letter-spacing:.2px;}#sw4 .hero .sub{opacity:.92;font-size:13px;}#sw4 .stamp{display:inline-block;margin-top:10px;background:rgba(255,255,255,.16);
+    padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600;}#sw4 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:14px 14px 12px;margin-top:14px;}#sw4 .card h2{margin:0 0 10px;font-size:15px;display:flex;align-items:center;gap:8px;
+    border-bottom:1px solid var(--line);padding-bottom:8px;}#sw4 .row{padding:8px 0;border-bottom:1px dashed var(--line);}#sw4 .row:last-child{border-bottom:none;}#sw4 .row b{color:#fff;}#sw4 .meta{color:var(--muted);font-size:12.5px;margin-top:2px;}#sw4 .tag{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;margin-right:6px;vertical-align:middle;}#sw4 .t-win{color:var(--gold);border:1px solid var(--gold);}#sw4 .t-out{color:var(--red);border:1px solid var(--red);}#sw4 .t-new{color:var(--accent);border:1px solid var(--accent);}#sw4 .t-watch{color:var(--blue);border:1px solid var(--blue);}#sw4 table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px;}#sw4 th, #sw4 td{padding:6px 4px;text-align:center;border-bottom:1px solid var(--line);}#sw4 th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.4px;}#sw4 td.team{text-align:left;font-weight:600;white-space:nowrap;}#sw4 tr.lead td{background:rgba(25,195,125,.08);}#sw4 tr.rel td{background:rgba(226,59,78,.10);}#sw4 .note{color:var(--muted);font-size:12px;font-style:italic;margin:6px 0 0;}#sw4 .foot{color:var(--muted);font-size:11.5px;text-align:center;margin:18px 0 6px;}#sw4 a{color:var(--blue);}</style><div id="sw4" class="hubwrap">
+<div class="wrap">
+
+  <header class="hero">
+    <h1>🏟️ Club Football Hub</h1>
+    <div class="sub">Champions League · Premier League · Championship (West Ham) · La Liga (Real Madrid) · PSG</div>
+    <div class="stamp">Updated: Sun, Jun 21, 2026 · 🟢 PL transfer window OPEN · 📅 PL 2026/27 fixtures OUT · ⚒️ West Ham Championship fixtures Thu Jun 25</div>
+  </header>
+
+  <div class="card">
+    <div class="note" style="margin-top:0"><b>Today (Sun Jun 21):</b> <b>No major changes since the last update</b> — quiet World Cup-week Sunday across club football, with most business at the rumour/advanced stage. <b>Transfer window day 7 (PL Jun 15–Sep 1).</b> Newest threads: <b>Tottenham</b> have agreed a ~&pound;52m deal with Brighton for <b>Jan Paul van Hecke</b> (CB) and are also chasing <b>Adam Wharton</b> (Crystal Palace mid); <b>Brighton</b> confirmed <b>Costinha</b> (~&pound;11m, Olympiacos); <b>Elliot Anderson</b> (Forest) now looks <b>more likely Man City</b> than Man Utd; <b>Arsenal</b> exploring <b>Bradley Barcola</b> (PSG, Liverpool also monitoring); <b>Casemiro</b> has agreed to join <b>Inter Miami</b>; <b>Mourinho blocked Gonzalo García's exit</b> at Real Madrid. <b>Mateus Fernandes</b> race still the West Ham headline (Man Utd lead, ~&pound;80m vs ~&pound;60m gap). <b>West Ham's Championship fixtures land Thu Jun 25 (12:00 UK).</b> <i>Re-verified Sun Jun 21 via Sky Sports / ESPN / BBC / The Athletic / official club sources — no major changes vs Sat: Fernandes still West Ham's headline sale; Dumfries clause triggered; Dembélé extension trending positive (post-WC); Championship fixtures Thursday.</i></div>
+  </div>
+
+  <!-- CHAMPIONS LEAGUE -->
+  <div class="card">
+    <h2>🏆 Champions League</h2>
+    <div class="row">
+      <span class="tag t-win">2025/26 WINNERS</span><b>Paris Saint-Germain</b> — beat Arsenal 4–3 on penalties (a.e.t.) in the Budapest final (May 30). PSG's <b>back-to-back</b> European crown; Luis Enrique joins Zidane as the only modern manager to retain it.
+    </div>
+    <div class="row">
+      <b>2026/27 — key dates</b>
+      <div class="meta">3rd year of the 36-team league phase (8 games each; top 8 → last 16, 9th–24th → playoff). <b>League-phase draw: Thu Aug 27, 2026</b> (pots confirmed Aug 26). Matchday 1: <b>Sep 8–10</b>; MD2 Oct 13/14; MD3 Oct 20/21; MD4 Nov 3/4; MD5 Nov 24/25; MD6 Dec 8/9; MD7 Jan 19/20; MD8 Jan 27, 2027.</div>
+    </div>
+    <div class="row">
+      <b>Knockouts &amp; final</b>
+      <div class="meta">KO play-off draw Jan 19; first legs Feb 16–17, second legs Feb 23–24, 2027; R16 March. <b>Final: Sat Jun 5, 2027 — Estadio Metropolitano, Madrid.</b></div>
+    </div>
+    <div class="row">
+      <b>Qualifying under way</b>
+      <div class="meta">1st &amp; 2nd qualifying-round draws held (Jun 16 &amp; 17) — no English clubs at this stage. Matches: Q1 Jul 7/8 &amp; 14/15; Q2 Jul 21/22 &amp; 28/29; Q3 Aug 4/5 &amp; 11 (draw Jul 20); play-offs Aug 18/19 &amp; 25/26 (draw Aug 3) — feeding into the Aug 27 league-phase draw.</div>
+    </div>
+    <div class="row">
+      <span class="tag t-new">EXTRA SPOTS</span>Liverpool 🏴 and Real Betis 🇪🇸 earned the two "European Performance Spots" for 2026/27 via country coefficients.
+    </div>
+  </div>
+
+  <!-- PREMIER LEAGUE -->
+  <div class="card">
+    <h2>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</h2>
+    <div class="row">
+      <span class="tag t-new">FIXTURES OUT</span><b>2026/27 fixtures released Fri Jun 19 (10:00 BST).</b> 33 weekend + 5 midweek rounds; starts <b>Fri Aug 21</b>, ends <b>Sun May 30, 2027</b>.
+      <div class="meta"><b>Opening round:</b> Fri Aug 21 — <b>Arsenal v Coventry City</b> (20:00, Sky). Sat Aug 22 — <b>Hull City v Man Utd</b> (12:30, TNT); Nott'm Forest v Leeds, Crystal Palace v Everton, Ipswich v Sunderland (all 15:00); Brentford v Tottenham (17:30, Sky). Sun Aug 23 — <b>Man City v Bournemouth</b>, Brighton v Aston Villa (14:00), <b>Newcastle v Liverpool</b>. Mon Aug 24 — <b>Chelsea v Fulham</b> (MNF).</div>
+    </div>
+    <div class="row">
+      <span class="tag t-new">WINDOW OPEN</span>Summer transfer window <b>opened Mon Jun 15</b>, closes <b>Tue Sep 1 (23:00 BST)</b> — a later cut-off than the past two summers. Now <b>day 7</b>; activity slow with many players at the World Cup.
+    </div>
+    <div class="row">
+      <span class="tag t-win">2025/26 CHAMPIONS</span><b>Arsenal</b> — 85 pts; first English title in 22 years. Mikel Arteta named Manager of the Season. Man City 2nd (78).
+    </div>
+    <div class="row">
+      <span class="tag t-win">GOLDEN BOOT</span>Erling Haaland 🇳🇴 — 27 goals.
+    </div>
+  </div>
+
+  <!-- CHAMPIONSHIP / WEST HAM -->
+  <div class="card">
+    <h2>⚒️ The Championship — West Ham United</h2>
+    <div class="row">
+      <span class="tag t-out">RELEGATED FROM PL</span>West Ham finished bottom (or near-bottom) of the 2025/26 Premier League. Now in their <b>first Championship season since 2011/12</b> — target: immediate promotion.
+    </div>
+    <div class="row">
+      <b>2026/27 fixtures — releasing Thu Jun 25 (12:00 UK)</b>
+      <div class="meta">Championship season starts the weekend of <b>Sat Aug 14–Sun Aug 16, 2026</b> (one week before the PL). <b>Millwall</b> tipped as a headline opener for West Ham (East London derby). Full fixture list confirmed for <b>12:00 UK time Thu Jun 25</b> — Nuno's first concrete promotion deadline. <b>Nuno Espírito Santo</b> targets auto-promotion (top 2) or the play-offs. Squad under restructure; must raise ~&pound;150m in sales.</div>
+    </div>
+    <div class="row">
+      <span class="tag t-new">MANAGER</span><b>Nuno Espírito Santo</b> — brought in to steer the promotion push. Wants squad stability but financial pressure is forcing sales of Mateus Fernandes (~&pound;80m to Man Utd likely), Crysencio Summerville (~&pound;50m) and possibly Jarrod Bowen. <b>N'Golo Kanté</b> retained as a Championship leader.
+    </div>
+    <div class="row">
+      <b>Pre-season friendlies taking shape</b>
+      <div class="meta">Trips to Southend United, Stevenage, and <b>Rangers (Sun Jul 26, 16:00 BST)</b>. Squad overhaul under way; Nuno pushing for depth in midfield and defence.</div>
+    </div>
+    <div class="row">
+      <span class="tag t-watch">FINANCIAL CRUNCH</span>Must sell ~<b>&pound;150m</b> to balance the budget post-relegation. Mateus Fernandes &amp; Crysencio Summerville sales are primary targets; Jarrod Bowen (Newcastle, Liverpool, Chelsea, Man Utd, Aston Villa &amp; Everton interest) adds pressure.
+    </div>
+  </div>
+
+  <!-- LA LIGA / REAL MADRID -->
+  <div class="card">
+    <h2>🇪🇸 La Liga — Real Madrid Focus</h2>
+    <div class="row">
+      <span class="tag t-new">NEW MANAGER — MOURINHOOLOGY</span><b>José Mourinho</b> appointed June 2026 on a 3-year deal (to June 2029) following Florentino Pérez's election victory. <b>Confirmed signings:</b> <b>Ibrahima Konaté</b> (CB, free ex-Liverpool, 4-yr — joins Jun 30), <b>Bernardo Silva</b> (mid, free ex-Man City), <b>Marc Cucurella</b> (LB, ex-Chelsea — now official). <b>Denzel Dumfries</b> (RB, ex-Inter) lined up via his <b>~&pound;17m / €25m release clause</b> as the first paid deal.
+    </div>
+    <div class="row">
+      <span class="tag t-watch">REBUILD TARGETS</span>Mourinho has requested <b>up to six signings</b> for a "drastic defensive overhaul": <b>Rúben Dias</b> (Man City), <b>Tomás Araújo</b> (Benfica, ~€80m clause), <b>Nico Schlotterbeck</b> (Dortmund, release clause), <b>Riccardo Calafiori</b> (Arsenal). Also hunting a marquee <b>deep-lying midfielder</b> (~€140m); Pérez has pledged €150m+ for a "Galáctico".
+    </div>
+    <div class="row">
+      <span class="tag t-out">SELL LIST</span><b>Federico Valverde</b> — Mourinho ordered a sale after "terrible reports" (attitude issues last season); contract to 2029 complicates the exit. <b>Dani Ceballos</b> unlikely to stay. <b>David Alaba &amp; Dani Carvajal</b> already departed as free agents.
+    </div>
+    <div class="row">
+      <span class="tag t-watch">STAY OF EXECUTION</span><b>Gonzalo García</b> — Mourinho has <b>told the club to STOP negotiating his departure</b>, wanting to work with the young attacker for a few weeks before deciding his future.
+    </div>
+    <div class="row">
+      <span class="tag t-out">ÁLVAREZ SAGA</span>Atlético <b>rejected a €150m Real Madrid bid</b> for <b>Julián Álvarez</b>; Barcelona readying a ~€135m offer post-World Cup.
+    </div>
+    <div class="row">
+      <span class="tag t-win">2025/26 LA LIGA</span><b>Barcelona</b> — 29th league title. Real Madrid finished behind Barça. Kylian Mbappé 🇫🇷 won Pichichi with 25 goals.
+    </div>
+  </div>
+
+  <!-- PSG -->
+  <div class="card">
+    <h2>🅿️ Paris Saint-Germain</h2>
+    <div class="row">
+      <span class="tag t-win">EUROPEAN CHAMPIONS</span>Back-to-back Champions League winners under <b>Luis Enrique</b>.
+    </div>
+    <div class="row">
+      <span class="tag t-new">MANAGER — CONFIRMED</span><b>Luis Enrique extended his contract to June 2030</b> — one of Europe's best-paid managers, aligned with sporting advisor Luis Campos. President Nasser Al-Khelaifi has repeatedly laughed off any exit talk. Part of a wider <b>renewal spree</b> also including <b>Bradley Barcola</b> and <b>Fabián Ruiz</b>.
+    </div>
+    <div class="row">
+      <span class="tag t-watch">DEMBÉLÉ — TRENDING POSITIVE</span>Ballon d'Or holder <b>Ousmane Dembélé</b> (deal to 2028): RMC Sport, Fox &amp; Tribuna report an extension is <b>close</b> and the player has said he is "100%" staying. Earlier wage-gap claims circulated, but <b>Luis Enrique branded the "problem" reports "fake news."</b> No rush from either side — agreement expected <b>after the World Cup</b>.
+    </div>
+    <div class="row">
+      <span class="tag t-watch">BARCOLA INTEREST</span><b>Arsenal</b> are exploring a move for winger <b>Bradley Barcola</b> and reportedly lead the race, though Liverpool are monitoring. PSG, however, are working to <b>extend</b> Barcola — a likely retention.
+    </div>
+    <div class="row">
+      <span class="tag t-out">PLANNED EXITS</span><b>Kang-in Lee</b> and <b>Gonçalo Ramos</b> are set to leave — no talks to extend deals running to 2028. <b>Randal Kolo Muani</b> (back from his Spurs loan, ~€40m) is not in Luis Enrique's plans — <b>Juventus, Galatasaray and Fenerbahçe</b> credited with interest.
+    </div>
+  </div>
+
+  <!-- TRANSFER WIRE -->
+  <div class="card">
+    <h2>🔁 Transfer Wire</h2>
+    <div class="meta" style="margin:-4px 0 8px">Summer window: PL OPEN <b>Mon Jun 15</b> · closes <b>Tue Sep 1</b>. ✅ done · 🔵 advanced · ➡️ leaving · ❓ rumour.</div>
+
+    <div class="row">
+      <b>🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League</b>
+      <div class="meta">✅ Brighton — Zadok Yohanna (winger, 18, ~&pound;21.5m from Stockholm; 5-yr deal)</div>
+      <div class="meta">✅ Brighton — Costinha (~&pound;11m, Olympiacos; 5-yr deal)</div>
+      <div class="meta">✅ Newcastle — Ewen Jaouen (GK, 20, ~&pound;18.5m from Reims; done ahead of the World Cup)</div>
+      <div class="meta">✅ Ipswich Town — signings from Ajax &amp; Reims (fees undisclosed)</div>
+      <div class="meta">✅ Brentford — striker from Red Bull Salzburg (~&pound;12m)</div>
+      <div class="meta">✅ Tottenham — Andrew Robertson (free, ex-Liverpool; joins after Scotland's World Cup) &amp; Marcos Senesi (free, ex-Bournemouth)</div>
+      <div class="meta">✅ Wolves — Kieran Trippier (RB, free, ex-Newcastle)</div>
+      <div class="meta">✅ Chelsea — Geovany Quenda, Denner, Dastan Satpaev, Emmanuel Emegha</div>
+      <div class="meta">✅ Arsenal — sold Jakub Kiwior (Porto) &amp; Karl Hein (Werder Bremen)</div>
+      <div class="meta">✅ Liverpool — Jérémy Jacquet (CB, Rennes); 🟢 Andoni Iraola in as head coach (Slot out); ➡️ released Mohamed Salah (free) &amp; confirmed Ibrahima Konaté exit (Jun 30); 🔵 lining up two wingers, Yan Diomande the top target</div>
+      <div class="meta">✅ Newcastle — sold Anthony Gordon to Barcelona (out of the PL)</div>
+      <div class="meta">➡️ Loan returns — Jadon Sancho (Man Utd), Harvey Elliott (Liverpool), Douglas Luiz (Juventus), Evann Guessand (Crystal Palace), Enzo Barrenechea (Benfica), Samuel Iling-Junior (Pisa)</div>
+      <div class="meta">🔵 Tottenham — <b>Jan Paul van Hecke</b> (CB, Brighton): deal agreed at ~&pound;52m</div>
+      <div class="meta">❓ Tottenham — pursuing <b>Adam Wharton</b> (mid, Crystal Palace)</div>
+      <div class="meta">🔵 Sandro Tonali (Newcastle) — <b>Man Utd OUT</b>; <b>Tottenham have AGREED personal terms</b> (De Zerbi's No.1 target); Newcastle (to 2029) have had NO bid and want &pound;100m+</div>
+      <div class="meta">❓ Arsenal — Julián Álvarez (ST, Atlético) a top target (Atléti rejected ~€150m Madrid bid); also exploring <b>Bradley Barcola</b> (PSG winger, Arsenal said to lead; Liverpool monitoring)</div>
+      <div class="meta">🔵 Man Utd — can land Barcelona LB Alejandro Balde cheaply (green light reported)</div>
+      <div class="meta">❓ Elliot Anderson (Nottingham Forest) — now looks <b>more likely Man City</b> than Man Utd; United reluctant to enter a bidding war</div>
+      <div class="meta">❓ Casemiro (ex-Man Utd) — has <b>agreed to join Inter Miami</b> after a months-long saga</div>
+      <div class="meta">❓ Barcelona &amp; Chelsea — set to battle for Andrea Cambiaso (LB, Juventus)</div>
+      <div class="meta">❓ Jarrod Bowen (West Ham) — wide interest: Newcastle, Liverpool, Chelsea, Man Utd, Aston Villa &amp; Everton</div>
+      <div class="meta">🔵 Mateus Fernandes (West Ham) — <b>Man Utd the most likely destination</b>, but a fee gap remains: West Ham want ~&pound;80m, United pushing ~&pound;60m, no agreement yet (Sporting hold a 15% sell-on). <b>Bruno Fernandes backing the move</b>; player prefers United; <b>Tottenham (De Zerbi) have contacted agent Jorge Mendes</b>; Real Madrid &amp; PSG also credited</div>
+      <div class="meta">🔵 Crysencio Summerville (West Ham, ~&pound;50m) — Man Utd have enquired; said to hinge on Marcus Rashford's future; ❓ Tottenham trying to hijack; PSG also keen</div>
+    </div>
+
+    <div class="row">
+      <b>🇪🇸 Real Madrid</b>
+      <div class="meta">✅ Ibrahima Konaté (CB, free ex-Liverpool, 4-yr) — confirmed; joins Jun 30</div>
+      <div class="meta">✅ Bernardo Silva (mid, free ex-Man City) — confirmed</div>
+      <div class="meta">✅ Marc Cucurella (LB, ex-Chelsea) — now official</div>
+      <div class="meta">🔵 Denzel Dumfries (RB, ex-Inter) — lined up via his <b>~&pound;17m / €25m release clause</b> (first paid signing of the window)</div>
+      <div class="meta">➡️ David Alaba &amp; Dani Carvajal — left as free agents; Dani Ceballos unlikely to stay</div>
+      <div class="meta">➡️ Federico Valverde — Mourinho reportedly told the board to SELL after "terrible reports" (contract to 2029)</div>
+      <div class="meta">➡️ Brahim Díaz — Mourinho willing to let him go to help fund a marquee signing</div>
+      <div class="meta">🛑 Gonzalo García — Mourinho has told the club to STOP negotiating his exit (wants a few weeks to assess him)</div>
+      <div class="meta">🔵 Marquee central midfielder — top priority (~€140m; Pérez pledged €150m+ for a Galáctico)</div>
+      <div class="meta">❓ Riccardo Calafiori (CB, Arsenal) — Mourinho-approved target in a defensive overhaul (up to six signings requested)</div>
+      <div class="meta">❓ Tomás Araújo (CB, Benfica) — Mourinho keen; ≈€80m release clause</div>
+      <div class="meta">❓ Rúben Dias (CB, Man City) — Mourinho personally sounding him out</div>
+      <div class="meta">❓ Nico Schlotterbeck (CB, Borussia Dortmund) — discussed; has a release clause</div>
+      <div class="meta">❓ Julián Álvarez (Atlético) — €150m Madrid bid rejected; Barça readying ~€135m post-WC</div>
+    </div>
+
+    <div class="row">
+      <b>🅿️ PSG</b>
+      <div class="meta">✅ Luis Enrique — contract extension to June 2030 confirmed</div>
+      <div class="meta">🔵 Renewals — Bradley Barcola &amp; Fabián Ruiz extensions in the works (PSG keen to fend off Arsenal/Liverpool interest in Barcola)</div>
+      <div class="meta">🔵 Ousmane Dembélé — extension reported <b>close</b> (RMC/Fox/Tribuna); player says he is "100%" staying; earlier wage-gap claims dubbed <b>"fake news"</b> by Luis Enrique; resolution after the World Cup</div>
+      <div class="meta">➡️ Randal Kolo Muani — back from Tottenham loan; not in plans (~€40m). Juventus, Galatasaray &amp; Fenerbahçe credited with interest</div>
+      <div class="meta">➡️ Kang-in Lee — set to leave; no extension talks (deal to 2028)</div>
+      <div class="meta">➡️ Gonçalo Ramos — set to leave; no extension talks (deal to 2028)</div>
+      <div class="meta">❓ Mateus Fernandes / Crysencio Summerville (West Ham) — both on PSG's radar</div>
+    </div>
+
+    <div class="row">
+      <b>⚒️ West Ham (trimming &amp; bracing for bids)</b>
+      <div class="meta">❓ Martin Adeline (mid, Troyes) — West Ham interested as they prepare for the Championship</div>
+      <div class="meta">🔵 Eliezer Mayenda (ST, Sunderland) — long-term Hammers admirers; player open to a summer move</div>
+      <div class="meta">❓ Axel Disasi (CB) — Nuno keen on a reunion after the defender's earlier loan impact</div>
+      <div class="meta">❓ Nuno-requested deal with a ~&pound;20m release clause reported (target undisclosed)</div>
+      <div class="meta">➡️ Tomáš Souček — opened door to exit; dreams of Slavia Prague return (Galatasaray linked, Everton mentioned)</div>
+      <div class="meta">➡️ Callum Wilson — contract expiring at month's end; expected to leave; weighing options vs Rangers, Celtic &amp; Coventry — talks with Nuno</div>
+      <div class="meta">➡️ Niclas Füllkrug — set to leave (Venezia keen; Hammers willing to tear up deal for a small fee)</div>
+      <div class="meta">➡️ Mateus Fernandes — most likely to go; <b>Man Utd lead</b>, fee gap remains (~&pound;80m ask vs ~&pound;60m bid; Sporting 15% sell-on). <b>Real Madrid, PSG &amp; Tottenham</b> credited; player favours United</div>
+      <div class="meta">➡️ Crysencio Summerville — ~&pound;50m; Man Utd have enquired, said to hinge on Rashford's future; Tottenham trying to hijack; PSG interest</div>
+      <div class="meta">➡️ Łukasz Fabiański &amp; Adama Traoré — confirmed to leave as free transfers (contracts expire Jun 30)</div>
+      <div class="meta">🟢 N'Golo Kanté — Nuno wants to keep him as a Championship leader</div>
+      <div class="meta">💷 Reports: Hammers must raise <b>~&pound;150m</b> in sales for the Championship</div>
+      <div class="meta">❓ Jarrod Bowen — wide PL interest (Newcastle, Liverpool, Chelsea, Man Utd, Aston Villa, Everton)</div>
+      <div class="meta">➡️ Aaron Wan-Bissaka, Jean-Clair Todibo — among those who may move on</div>
+      <div class="meta">🔵 Dael Fry (CB, ex-Middlesbrough free) — West Ham frontrunners; talks progressing</div>
+      <div class="meta">❓ Nestory Irankunda (winger, 20, Watford) · Harrison Burrows (LB/WB, Sheffield Utd) · Hayden Hackney (mid, Middlesbrough) · Ethan Galbraith (mid, Swansea) — Championship targets</div>
+    </div>
+    <div class="note">Window early; many items still rumour/advanced; refreshed daily. Latest (Sun Jun 21 — <b>no major changes since the last update</b>): Spurs agree ~&pound;52m for van Hecke and chase Wharton; Brighton confirm Costinha; Anderson leans Man City; Arsenal eye Barcola; Casemiro agrees Inter Miami; Mourinho blocks Gonzalo García exit. Fernandes still West Ham's ~&pound;80m headline sale with Man Utd most likely; West Ham must raise ~&pound;150m and owe Sporting 15%; Dembélé extension trending positive. 📅 <b>Next: West Ham's Championship fixtures Thu Jun 25 at 12:00 UK time.</b></div>
+  </div>
+
+  <!-- STANDINGS -->
+  <div class="card">
+    <h2>📊 Final 2025/26 Standings</h2>
+
+    <div class="note" style="margin-top:0">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Premier League — top &amp; bottom</div>
+    <table>
+      <tr><th>Pos</th><th>Team</th><th>Pts</th></tr>
+      <tr class="lead"><td>1</td><td class="team">Arsenal 🏆</td><td>85</td></tr>
+      <tr><td>2</td><td class="team">Manchester City</td><td>78</td></tr>
+      <tr class="rel"><td>18</td><td class="team">West Ham United ⬇</td><td>—</td></tr>
+      <tr class="rel"><td>19</td><td class="team">Burnley ⬇</td><td>—</td></tr>
+      <tr class="rel"><td>20</td><td class="team">Wolves ⬇</td><td>—</td></tr>
+    </table>
+    <div class="note">Mid-table positions (3–17) not all same-day confirmed — full table at the source link below.</div>
+
+    <div class="note" style="margin-top:12px">🇪🇸 La Liga</div>
+    <table>
+      <tr><th>Pos</th><th>Team</th><th>Note</th></tr>
+      <tr class="lead"><td>1</td><td class="team">Barcelona 🏆</td><td>29th title</td></tr>
+      <tr><td>—</td><td class="team">Real Madrid</td><td>finished behind Barça</td></tr>
+    </table>
+
+    <div class="note" style="margin-top:12px">🏆 Champions League</div>
+    <table>
+      <tr><th>—</th><th>Team</th><th>Result</th></tr>
+      <tr class="lead"><td>🥇</td><td class="team">PSG</td><td>beat Arsenal 4–3 pens</td></tr>
+      <tr><td>🥈</td><td class="team">Arsenal</td><td>runners-up</td></tr>
+    </table>
+
+    <div class="note">New seasons: Championship Aug 14 · Premier League Aug 21 · La Liga mid-Aug · Champions League league phase Sep 8–10 (draw Aug 27). Standings reset then.</div>
+  </div>
+
+  <div class="foot">
+    Static snapshot — refreshed daily by the club-football-hub task. No hosting; lives in iCloud → Claude Daily Reports → Trackers.
+  </div>
+
+</div>
+</div>
+  </section>
+
+  <!-- 🏆 Champions Lg (ported from Daily Sports Tracker) -->
+  <section class="tab port" id="ucl">
+    <div class="note">🏆 <b>Champions League</b> — the European cup latest. <i>Daily snapshot.</i></div>
+<div class="synced">🕒 Last synced: Sun Jun 21, 6:26 AM</div><style>#sw5{
+    --bg:#0b1220; --card:#121c2e; --card2:#16223a; --ink:#eef3fb; --muted:#9fb0c8;
+    --line:#243450; --accent:#19c37d; --gold:#f0b429; --red:#e23b4e; --blue:#3b82f6; --ucl:#1b1f6b;
+  }#sw5 *{box-sizing:border-box}#sw5{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.45;padding:14px;-webkit-text-size-adjust:100%;}#sw5 .wrap{max-width:680px;margin:0 auto;}#sw5 header.hero{background:linear-gradient(120deg,#0a0f4d 0%,#10233b 55%,#1b3a8f 100%);
+    color:#fff;border-radius:16px;padding:18px 18px 16px;box-shadow:0 6px 18px rgba(0,0,0,.35);}#sw5 .hero h1{margin:0 0 4px;font-size:21px;letter-spacing:.2px;}#sw5 .hero .sub{opacity:.92;font-size:13px;}#sw5 .stamp{display:inline-block;margin-top:10px;background:rgba(255,255,255,.16);
+    padding:4px 10px;border-radius:999px;font-size:12px;font-weight:600;}#sw5 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:14px 14px 12px;margin-top:14px;}#sw5 .card h2{margin:0 0 10px;font-size:15px;display:flex;align-items:center;gap:8px;
+    border-bottom:1px solid var(--line);padding-bottom:8px;}#sw5 .row{padding:8px 0;border-bottom:1px dashed var(--line);}#sw5 .row:last-child{border-bottom:none;}#sw5 .row b{color:#fff;}#sw5 .meta{color:var(--muted);font-size:12.5px;margin-top:2px;}#sw5 .tag{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;margin-right:6px;vertical-align:middle;}#sw5 .t-win{color:var(--gold);border:1px solid var(--gold);}#sw5 .t-info{color:var(--blue);border:1px solid var(--blue);}#sw5 .t-new{color:var(--accent);border:1px solid var(--accent);}#sw5 table{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px;}#sw5 th, #sw5 td{padding:6px 4px;text-align:center;border-bottom:1px solid var(--line);}#sw5 th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.4px;}#sw5 td.team{text-align:left;font-weight:600;white-space:nowrap;}#sw5 tr.lead td{background:rgba(240,180,41,.10);}#sw5 .lead-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--line);}#sw5 .lead-row:last-child{border-bottom:none;}#sw5 .lead-row b{font-weight:700;}#sw5 .note{color:var(--muted);font-size:12px;font-style:italic;margin:6px 0 0;}#sw5 .pill{display:inline-block;background:var(--card2);border:1px solid var(--line);
+    border-radius:999px;padding:3px 9px;font-size:12px;margin:3px 4px 0 0;}#sw5 .foot{color:var(--muted);font-size:11.5px;text-align:center;margin:18px 0 6px;}#sw5 a{color:var(--blue);}</style><div id="sw5" class="hubwrap">
+<div class="wrap">
+
+  <header class="hero">
+    <h1>🏆 Champions League Hub</h1>
+    <div class="sub">UEFA Champions League — 2025/26 review &amp; 2026/27 build-up</div>
+    <div class="stamp">🕒 Last synced: Sun, Jun 21, 2026 · 6:26 AM CT</div>
+  </header>
+
+  <!-- OFF-SEASON STATUS -->
+  <div class="card">
+    <h2>📌 Off-Season Status</h2>
+    <div class="row">
+      <span class="tag t-info">STATUS</span><b>Both opening qualifying draws are now done.</b>
+      <div class="meta">Off-season holding pattern. The first two qualifying-round draws — <b>Q1 (Tue Jun 16)</b> and <b>Q2 (Wed Jun 17)</b> — have both been made in Nyon. The 7 remaining league-phase berths fill via Jul–Aug qualifying &amp; the Aug 18/19 &amp; 25/26 play-offs.</div>
+    </div>
+    <div class="row"><span class="tag t-info">SYNC</span><b>No major changes since last update.</b><div class="meta">Morning check (Sun, Jun 21, 2026 · 6:26 AM CT): Re-verified vs UEFA.com — off-season holding pattern intact. Q1 (Jun 16) &amp; Q2 (Jun 17) men's qualifying draws done; 52 teams now in the qualifying system (42 Champions Path, 10 League Path). Schedule unchanged: Q1 legs Jul 7/8 &amp; 14/15, Q2 legs Jul 21/22 &amp; 28/29; Q3 draw Mon Jul 20; play-off draw Mon Aug 3 (legs Aug 18/19 &amp; 25/26). 29 of 36 league-phase teams confirmed; final 7 berths settle at the Aug play-offs. No fixtures until July. Stamp refreshed.</div></div>
+    <div class="row">
+      <span class="tag t-new">Q2 DRAW</span><b>Second qualifying round draw made Wed Jun 17 (Nyon)</b>
+      <div class="meta">🗓️ Held <b>10:00 CET</b>. 28 clubs/pairings drawn — <b>24 in the Champions Path</b> (10 Q2 entrants + 14 Q1 winners) and <b>4 in the League Path</b>. First legs <b>Jul 21/22</b>, returns <b>Jul 28/29</b>. Confirmed kick-off times to follow.</div>
+    </div>
+    <div class="row"><b>Q2 entrants — Champions Path (10 seeds joining Q1 winners)</b>
+      <div class="meta">Red Star Belgrade 🇷🇸 · Dinamo Zagreb 🇭🇷 · Slovan Bratislava 🇸🇰 · Lech Poznań 🇵🇱 · Celje 🇸🇮 · Omonia 🇨🇾 · Hapoel Be'er Sheva 🇮🇱 · AGF 🇩🇰 · Thun 🇨🇭 · Mjällby AIF 🇸🇪.</div>
+    </div>
+    <div class="row"><b>Q2 — League Path (4 teams)</b>
+      <div class="meta">Seeded: Fenerbahçe 🇹🇷 · Sturm Graz 🇦🇹. Unseeded: Heart of Midlothian 🏴󠁧󠁢󠁳󠁣󠁴󠁿 · Górnik Zabrze 🇵🇱. The 2 winners advance to the Q3 League Path.</div>
+    </div>
+    <div class="row">
+      <span class="tag t-info">Q1 DRAW</span><b>First qualifying round — 14 ties (drawn Tue Jun 16)</b>
+      <div class="meta">28 clubs (14 seeded + 14 unseeded). First legs <b>Jul 7/8</b>, returns <b>Jul 14/15</b>. All small-nation/champions-path clubs — no major English/Spanish/French sides at this stage.</div>
+    </div>
+    <div class="row"><b>Q1 pairings (14 ties)</b>
+      <div class="meta">Sabah 🇦🇿 v The New Saints 🏴󠁧󠁢󠁷󠁬󠁳󠁿 · Floriana 🇲🇹 v Shamrock Rovers 🇮🇪 · Flora Tallinn 🇪🇪 v Iberia 1999 🇬🇪 · Lincoln Red Imps 🇬🇮 v Inter d'Escaldes 🇦🇩 · Tre Fiori 🇸🇲 v Larne · Ararat-Armenia 🇦🇲 v Riga 🇱🇻 · Vardar 🇲🇰 v KuPS 🇫🇮 · Kauno Žalgiris 🇱🇹 v Drita 🇽🇰 · Vitebsk 🇧🇾 v U. Craiova 🇷🇴 · Petrocub 🇲🇩 v Egnatia 🇦🇱 · Borac 🇧🇦 v Levski Sofia 🇧🇬 · Víkingur Reykjavík 🇮🇸 v Győr 🇭🇺 · Kairat Almaty 🇰🇿 v Sutjeska 🇲🇪 · KÍ Klaksvík 🇫🇴 v Atert Bissen 🇱🇺</div>
+    </div>
+    <div class="row"><span class="tag t-info">NEXT</span><b>Q3 draw — Mon Jul 20 (Nyon)</b><div class="meta">Third qualifying round draw; first legs Aug 4/5, returns Aug 11. Then the play-off round draw Mon Aug 3 (legs Aug 18/19 &amp; 25/26) settles the final 7 league-phase places.</div></div>
+    <div class="row"><b>29 of 36 league-phase teams confirmed</b><div class="meta">Domestic seasons across Europe are done; the final 7 league-phase places come through July–August qualifying &amp; the Aug 18/19 &amp; 25/26 play-offs.</div></div>
+  </div>
+
+  <!-- 2025/26 CHAMPIONS -->
+  <div class="card">
+    <h2>🏆 2025/26 Champions — Paris Saint-Germain</h2>
+    <div class="row">
+      <span class="tag t-win">WINNERS</span><b>PSG retain the trophy</b> — back-to-back European crowns under Luis Enrique; PSG enter 2026/27 as <b>two-time defending champions</b>.
+    </div>
+    <div class="row">
+      <b>Final — PSG 1–1 Arsenal (a.e.t.), 4–3 on penalties</b>
+      <div class="meta">🗓️ Sat May 30, 2026 · 🏟️ Puskás Aréna, Budapest</div>
+      <div class="meta">⚽ Kai Havertz 5' (ARS) · Ousmane Dembélé pen (PSG)</div>
+      <div class="meta">🥅 Shootout: ✅ Gonçalo Ramos, Désiré Doué, Achraf Hakimi, Lucas Beraldo (PSG) · ❌ Eberechi Eze &amp; Gabriel Magalhães missed (ARS)</div>
+    </div>
+    <div class="row">
+      <span class="tag t-info">RUNNERS-UP</span>Arsenal — first European Cup final since 2006; Havertz's early goal wasn't enough.
+    </div>
+  </div>
+
+  <!-- TOP SCORERS -->
+  <div class="card">
+    <h2>👟 2025/26 Top Scorers (Golden Boot)</h2>
+    <div class="lead-row"><span>🇫🇷 Kylian Mbappé (Real Madrid)</span><b>15</b></div>
+    <div class="note">Mbappé led the scoring charts despite Madrid's quarter-final exit. Full chasing pack — see UEFA stats.</div>
+  </div>
+
+  <!-- 2026/27 KEY DATES -->
+  <div class="card">
+    <h2>📅 2026/27 — Key Dates</h2>
+    <div class="row"><b>Qualifying draws</b><div class="meta">Q1: Tue Jun 16 ✅ · Q2: Wed Jun 17 ✅ · Q3: Mon Jul 20 · Play-off round: Mon Aug 3 (all Nyon)</div></div>
+    <div class="row"><b>Qualifying matches</b><div class="meta">Q1 Jul 7/8 &amp; 14/15 · Q2 Jul 21/22 &amp; 28/29 · Q3 Aug 4/5 &amp; 11 · Play-offs Aug 18/19 &amp; 25/26</div></div>
+    <div class="row"><b>League phase draw</b><div class="meta">Thu Aug 27, 2026</div></div>
+    <div class="row"><b>League phase</b><div class="meta">MD1: Sep 8–10 · MD2: Oct 13/14 · MD3: Oct 20/21 · MD4: Nov 3/4 · MD5: Nov 24/25 · MD6: Dec 8/9 · MD7: Jan 19/20 · MD8: Wed Jan 27, 2027 (unified matchday)</div></div>
+    <div class="row"><b>Knockouts</b><div class="meta">KO play-off (draw Jan 29; legs Feb 16/17 &amp; 23/24) → R16 (Mar 9/10 &amp; 16/17) → QF (Apr 6/7 &amp; 13/14) → SF (Apr 27/28 &amp; May 4/5)</div></div>
+    <div class="row"><span class="tag t-new">FINAL</span><b>Sat Jun 5, 2027 — Metropolitano Stadium, Madrid</b><div class="meta">Atlético Madrid's home ground (officially the Riyadh Air Metropolitano); 2nd Champions League final there after 2019.</div></div>
+  </div>
+
+  <!-- FORMAT -->
+  <div class="card">
+    <h2>🧩 Format</h2>
+    <div class="row"><b>36-team single league phase</b><div class="meta">Each club plays 8 different opponents (4 home, 4 away) in one combined table.</div></div>
+    <div class="row"><b>Qualification</b><div class="meta">Top 8 → straight to the Round of 16. 9th–24th → two-legged knockout play-off. 25th–36th → eliminated.</div></div>
+    <div class="row"><b>Field</b><div class="meta">36 teams: 29 direct entrants + 7 through qualifying (settled at the Aug play-offs).</div></div>
+  </div>
+
+  <!-- QUALIFIED -->
+  <div class="card">
+    <h2>✅ League Phase — Qualified (29 of 36)</h2>
+    <div class="note" style="margin-top:0">Confirmed direct entrants as of mid-June 2026. English, Spanish &amp; French clubs first.</div>
+    <div class="row">
+      <b>🏴󠁧󠁢󠁥󠁮󠁧󠁿 England (5):</b> Arsenal (1st), Manchester City (2nd), Manchester United (3rd), Aston Villa (4th, Europa League holders), Liverpool (5th — European Performance Spot).
+    </div>
+    <div class="row">
+      <b>🇪🇸 Spain (5):</b> Barcelona (1st), Real Madrid (2nd), Villarreal (3rd), Atlético Madrid (4th), Real Betis (5th — European Performance Spot).
+    </div>
+    <div class="row">
+      <b>🇫🇷 France (3):</b> Paris Saint-Germain (1st, title holders), Lens (2nd), Lille (3rd).
+    </div>
+    <div class="row">
+      <b>🇮🇹 Italy (4):</b> Inter Milan (1st), Napoli (2nd), Roma (3rd), Como (4th — debut, first European football in club history).
+    </div>
+    <div class="row">
+      <b>🇩🇪 Germany (4):</b> Bayern Munich (1st), Borussia Dortmund (2nd), RB Leipzig (3rd), VfB Stuttgart (4th).
+    </div>
+    <div class="row">
+      <b>Rest:</b> 🇳🇱 PSV Eindhoven &amp; Feyenoord · 🇵🇹 Porto &amp; Sporting CP · 🇧🇪 Club Brugge · 🇨🇿 Slavia Prague · 🇹🇷 Galatasaray · 🇺🇦 Shakhtar Donetsk (via title-holder rebalancing).
+      <div class="meta">Remaining 7 places via the champions/league qualifying paths, finalized after the Aug 25/26 play-offs and seeded for the Aug 27 draw.</div>
+    </div>
+  </div>
+
+  <!-- ROAD TO THE LEAGUE PHASE -->
+  <div class="card">
+    <h2>🛣️ Road to the League Phase — Notable Qualifying Sides</h2>
+    <div class="note" style="margin-top:0">Bigger clubs entering later qualifying rounds (chasing the final 7 berths). Data per UEFA seedings; ties firm up through Jul–Aug.</div>
+    <div class="row"><b>League Path — Q3 entry</b><div class="meta">🇫🇷 Lyon · 🇳🇴 Bodø/Glimt · 🇬🇷 Olympiacos · 🇧🇪 Union Saint-Gilloise · 🇨🇿 Sparta Prague · 🇳🇱 NEC.</div></div>
+    <div class="row"><b>Champions Path — Play-off entry</b><div class="meta">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Celtic · 🇬🇷 AEK Athens · 🇦🇹 LASK · 🇳🇴 Viking.</div></div>
+    <div class="row"><b>League Path — Q2 entry</b><div class="meta">🇹🇷 Fenerbahçe · 🇦🇹 Sturm Graz · 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Heart of Midlothian · 🇵🇱 Górnik Zabrze.</div></div>
+  </div>
+
+  <!-- LEAGUE PHASE (THE "GROUPS") -->
+  <div class="card">
+    <h2>📊 League Phase Table (the "groups")</h2>
+    <div class="note" style="margin-top:0">Since 2024 the Champions League has <b>no groups</b> — it's one combined <b>36-team league phase</b>. Top 8 → straight to the Round of 16 · 9th–24th → knockout play-off · 25th–36th → eliminated.</div>
+    <div class="row" style="padding-top:10px"><b>2025/26 final league phase — Top 8 (auto Round of 16)</b></div>
+    <table>
+      <tr><th>Pos</th><th>Team</th><th>→</th></tr>
+      <tr class="lead"><td>1</td><td class="team">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Arsenal</td><td>R16</td></tr>
+      <tr class="lead"><td>2</td><td class="team">🇩🇪 Bayern Munich</td><td>R16</td></tr>
+      <tr class="lead"><td>3</td><td class="team">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Liverpool</td><td>R16</td></tr>
+      <tr class="lead"><td>4</td><td class="team">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Tottenham</td><td>R16</td></tr>
+      <tr class="lead"><td>5</td><td class="team">🇪🇸 Barcelona</td><td>R16</td></tr>
+      <tr class="lead"><td>6</td><td class="team">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Chelsea</td><td>R16</td></tr>
+      <tr class="lead"><td>7</td><td class="team">🇵🇹 Sporting CP</td><td>R16</td></tr>
+      <tr class="lead"><td>8</td><td class="team">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Manchester City</td><td>R16</td></tr>
+    </table>
+    <div class="note">9th–24th = knockout play-off band (included eventual winners <b>PSG</b>, who came through the play-offs to lift the title); 25th–36th eliminated. Full 9–36 table at UEFA. The <b>2026/27</b> league-phase table populates after Matchday 1 (Sep 8, 2026).</div>
+  </div>
+
+  <!-- STORYLINES -->
+  <div class="card">
+    <h2>🔥 Storylines</h2>
+    <span class="pill">🅿️ PSG go back-to-back — two-time defending champions, a budding dynasty under Luis Enrique</span>
+    <span class="pill">😣 Arsenal's first final in 20 years ends in shootout heartbreak</span>
+    <span class="pill">👟 Mbappé tops the scoring (15) despite Madrid's QF exit</span>
+    <span class="pill">🆕 Como qualify for Europe for the first time ever — league-phase debut</span>
+    <span class="pill">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England land 5 spots; Aston Villa in as Europa League holders</span>
+    <span class="pill">🗓️ Q1 &amp; Q2 draws done (Jun 16–17) — road to Madrid underway</span>
+    <span class="pill">🏟️ Final at the Metropolitano, Madrid — Jun 5, 2027</span>
+  </div>
+
+  <div class="foot">
+    Static snapshot — refreshed daily by the champions-league-hub task. No hosting; lives in iCloud → Claude Daily Reports → Trackers.
+  </div>
+
+</div>
+</div>
+  </section>
+
 
 </div>
 
